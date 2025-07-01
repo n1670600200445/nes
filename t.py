@@ -74,8 +74,9 @@ def uploaded_file(filename):
     return send_from_directory(app.config["UPLOAD_FOLDER"], filename)
 
 
-@app.route("/manual", methods=["POST"])
+@app.route("/manual", methods=["GET", "POST"])
 def manual():
+    if request.method == "POST":
     value = request.form.get("manual_input")
     # ตรวจรูปแบบเลขทศนิยม
     if not value or not re.match(r"^\d+(\.\d+)?$", value):
